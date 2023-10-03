@@ -5,8 +5,16 @@ class Person {
     this.lastName = lastName;
     this.age = age;
   }
+  
+  toJson() {
+    return JSON.stringify(this);
+  }
+  static fromJson(json) {
+    const parsedData = JSON.parse(json);
+    return new Person(parsedData.id, parsedData.firstName, parsedData.lastName, parsedData.age);
+  }
 }
 
-const developer = new Person(1, 'Mario', 'Rossi', 25);
-const developerJson = JSON.stringify(developer);
-console.log(developerJson);
+const json = '{"id":1,"firstName":"Mario","lastName":"Rossi","age":25}';
+const developer = Person.fromJson(json);
+console.log(developer);
